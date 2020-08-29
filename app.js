@@ -197,10 +197,12 @@ const UICtrl = (function(){
             document.querySelector(UISelectors.addBtn).style.display = 'none';
         },
         getSelectors: function(){
-            return UISelectors
+            return UISelectors;
         }
     }
 })();
+
+
 
 // App Controller
 const App = (function(ItemCtrl, UICtrl){
@@ -236,6 +238,7 @@ const App = (function(ItemCtrl, UICtrl){
         if(input.name !== '' && input.calories !== ''){
             // Add item
             const newItem = ItemCtrl.addItem(input.name, input.calories);
+
             // Add item to UI list
             UICtrl.addListItem(newItem);
 
@@ -253,9 +256,7 @@ const App = (function(ItemCtrl, UICtrl){
     
     // Click edit item 
     const itemEditClick = function(e){
-        // console.log(e.target.classList);
         if(e.target.classList.contains('edit-item')){
-            
             // Get list item id (item-0, ...)
             const listId = e.target.parentNode.parentNode.id;
 
@@ -267,7 +268,7 @@ const App = (function(ItemCtrl, UICtrl){
 
             // Get item
             const itemToEdit = ItemCtrl.getItemById(id);
-            console.log(itemToEdit);
+
             // Set current item
             ItemCtrl.setCurrentItem(itemToEdit);
 
@@ -280,7 +281,6 @@ const App = (function(ItemCtrl, UICtrl){
 
     // Update item submit
     const itemUpdateSubmit = function(e){
-        console.log('update');
         // Get item input
         const input = UICtrl.getItemInput();
 
@@ -291,7 +291,7 @@ const App = (function(ItemCtrl, UICtrl){
         // Update UI
         UICtrl.updateListItem(updatedItem);
 
-        // // Get the total calories
+        // Get the total calories
         const totalCalories = ItemCtrl.getTotalCalories();
         // Add total calories to ui
         UICtrl.showTotalCalories(totalCalories);
@@ -316,9 +316,6 @@ const App = (function(ItemCtrl, UICtrl){
             }else{
                 UICtrl.populateItemList(items);
             }
-
-            // Populate list with items
-            // UICtrl.populateItemList(items);
 
              // Get the total calories
              const totalCalories = ItemCtrl.getTotalCalories();
